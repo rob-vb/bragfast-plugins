@@ -47,7 +47,7 @@ Brand: [auto-selected or only brand]
 You can edit, remove, or add slides — or say "looks good" to continue.
 ```
 
-After the user approves the slides (or adjusts them), use `AskUserQuestion` to ask two questions:
+After the user approves the slides (or adjusts them), use `AskUserQuestion` to ask three questions:
 
 1. **Output type** (single-select):
    - Question: "What would you like to generate?"
@@ -56,6 +56,10 @@ After the user approves the slides (or adjusts them), use `AskUserQuestion` to a
 2. **Formats** (multi-select with `multiSelect: true`):
    - Question: "Which formats do you want?"
    - Options: "Landscape" (Twitter/X, blogs, newsletters), "Portrait" (Instagram Stories, TikTok), "Square" (LinkedIn, Instagram feed)
+
+3. **Screenshots** (single-select):
+   - Question: "Do you have screenshots or images to include on the slides?"
+   - Options: "Yes, I'll paste URLs" (wait for the user to provide image URLs, then map them to the `image` object ID on the relevant slides), "No, text only" (skip image objects)
 
 Then proceed to Step 2 for brand/template selection with the user's choices.
 
