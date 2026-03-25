@@ -7,39 +7,42 @@ description: Generate branded release announcement images and videos
 
 You are helping the user create branded release announcement images or videos using Bragfast.
 
-## Step 1: Understand the Request
+## Step 1: Read the Room
 
-Ask the user: "What do you want to create? You can:"
-- Paste a GitHub release URL
-- Describe what you want (e.g., "Release images for v2.3.0 of my app")
-- Say "video" if you want a release video
+Before asking anything, scan the conversation history for context. Look for:
+- Features the user just built or shipped
+- Bug fixes, refactors, or improvements discussed
+- Version numbers, release notes, or changelogs mentioned
+- Screenshots or URLs that could be used as slide images
+- Any description of what changed and why
 
-## Step 2: Gather Context
+**If you find relevant context:** Propose slide content based on what you found. Say something like: "Based on what you've been working on, here's what I'd put on the slides:" — then show the plan. The user can approve or adjust.
 
-1. Call `bragfast_list_brands` to get available brands
-2. Call `bragfast_list_templates` to get available templates
-3. Present the options to the user:
-   - **Brands:** List each brand by name. If none exist, ask for colors (background, text, primary as hex).
-   - **Templates:** List each template by name. Recommend `standard-browser` as default.
+**If the conversation is empty or unrelated:** Ask: "What should the release images cover? You can paste a GitHub release URL, describe the features, or say 'video' for a video."
 
-Let the user pick a brand and template.
+## Step 2: Gather Brands & Templates
+
+1. Call `bragfast_list_brands` and `bragfast_list_templates` in parallel
+2. If only one brand exists, use it automatically — don't ask
+3. If multiple brands, ask which one
+4. If no brands, ask for colors (background, text, primary as hex)
+5. Default to `standard-browser` template unless the user specifies otherwise — don't list all templates unless asked
 
 ## Step 3: Compose Slides
 
-Based on the user's input (release notes, GitHub URL, or description):
+From the conversation context, release notes, or user description:
 
 1. Extract the top 3-5 features or changes
-2. For each slide, compose:
+2. Call `bragfast_get_template` for the chosen template to get object IDs
+3. For each slide, compose:
    - A short, punchy title (max ~40 chars)
    - A 1-2 line description
-   - Map content to object IDs from the chosen template's config
-3. Show the user the slide plan and ask for approval
-
-**Important:** Look at the template config's `objects` array to find the correct object IDs for title, description, and image fields.
+   - Map content to object IDs from the template config (`title`, `description`, `image`)
+4. Show the slide plan and ask for approval
 
 ## Step 4: Generate
 
-Based on what the user wants:
+Default to **landscape** format unless the user asks for something else.
 
 ### For Images:
 1. Call `bragfast_generate_release_images` with the composed slides
@@ -69,7 +72,7 @@ After showing results:
 
 ## Tips for Good Results
 
-- Use the brand's colors and logo for consistent branding
 - Keep slide titles short and impactful
 - Use "browser" or "mobile" device frames for screenshots
 - Square format works best for social media, landscape for blogs/newsletters
+- If the user has been discussing a UI change, suggest they provide a screenshot URL for the image object
