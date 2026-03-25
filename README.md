@@ -57,7 +57,7 @@ cp -r bragfast-skills/skills/* .agents/skills/
 
 | Skill | Description |
 |-------|-------------|
-| `/bragfast` | Generate release images or videos. Reads your conversation context to auto-compose slides, suggests templates based on what you're building. |
+| `/bragfast` | Generate release images or videos. Auto-reads your git history to compose slides with zero input — just type `/bragfast` after shipping. Falls back to conversation context if no git history is available. |
 
 ## License
 
