@@ -7,7 +7,7 @@ Claude Code skills for [brag.fast](https://brag.fast) — generate branded relea
 Add the MCP server and authenticate:
 
 ```bash
-claude mcp add bragfast -- npx -y @bragfast/mcp-server
+claude mcp add bragfast -- npx -y @bragfast/mcp-server@latest
 npx @bragfast/mcp-server login <your-api-key>
 ```
 
