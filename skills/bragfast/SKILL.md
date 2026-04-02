@@ -80,13 +80,24 @@ Present your suggestion with brief reasoning and let the user confirm or change.
 
 - The `formats` parameter must be a JSON array of objects, not a JSON string. Pass `"formats": [{"name": "landscape", "slides": [...]}]`, not `"formats": "[{...}]"`.
 
+### Polling rules (IMPORTANT — renders take time, do NOT poll too fast)
+
+Renders are slow. You MUST use `sleep 60` before the first status check and `sleep 30` between every subsequent check. Never use a shorter interval.
+
+| | First wait | Subsequent waits | Max attempts |
+|---|---|---|---|
+| Images | `sleep 60` | `sleep 30` | 5 |
+| Video | `sleep 60` | `sleep 30` | 8 |
+
 ### For images:
 1. Call `bragfast_generate_release_images` with the composed slides
-2. Poll `bragfast_get_render_status` with the returned `cook_id` — wait **60 seconds** before the first check, then **30 seconds** between subsequent checks, up to 5 attempts total
+2. Run `sleep 60`, then call `bragfast_get_render_status` with the returned `cook_id`
+3. If not done, run `sleep 30` before each retry (up to 5 attempts total)
 
 ### For video:
 1. Call `bragfast_generate_release_video` with the composed slides
-2. Poll `bragfast_get_render_status` — wait **60 seconds** before the first check, then **30 seconds** between subsequent checks, up to 8 attempts total (videos take longer)
+2. Run `sleep 60`, then call `bragfast_get_render_status` with the returned `cook_id`
+3. If not done, run `sleep 30` before each retry (up to 8 attempts total)
 
 ### After results:
 - Show the image/video URLs
