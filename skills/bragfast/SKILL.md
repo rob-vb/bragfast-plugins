@@ -82,11 +82,11 @@ Present your suggestion with brief reasoning and let the user confirm or change.
 
 ### For images:
 1. Call `bragfast_generate_release_images` with the composed slides
-2. Poll `bragfast_get_render_status` with the returned `cook_id` — wait 5 seconds between attempts, up to 3 times
+2. Poll `bragfast_get_render_status` with the returned `cook_id` — wait **60 seconds** before the first check, then **30 seconds** between subsequent checks, up to 5 attempts total
 
 ### For video:
 1. Call `bragfast_generate_release_video` with the composed slides
-2. Poll `bragfast_get_render_status` — wait 10 seconds between attempts, up to 6 times (videos take longer)
+2. Poll `bragfast_get_render_status` — wait **60 seconds** before the first check, then **30 seconds** between subsequent checks, up to 8 attempts total (videos take longer)
 
 ### After results:
 - Show the image/video URLs
