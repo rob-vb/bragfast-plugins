@@ -15,17 +15,7 @@ Get an API key at [brag.fast/dashboard/account](https://brag.fast/dashboard/acco
 
 ## Install
 
-### Option 1: CLI Install (Recommended)
-
-Use [npx skills](https://github.com/anthropics/skills) to install skills directly:
-
-```bash
-npx skills add rob-vb/bragfast-skills
-```
-
-This automatically installs to your `.agents/skills/` directory (and symlinks into `.claude/skills/` for Claude Code compatibility).
-
-### Option 2: Claude Code Plugin
+### Option 1: Claude Code Plugin (Recommended)
 
 Install via Claude Code's built-in plugin system:
 
@@ -36,6 +26,16 @@ Install via Claude Code's built-in plugin system:
 # Install all skills
 /plugin install bragfast-skills
 ```
+
+### Option 2: CLI Install
+
+Use [npx skills](https://github.com/anthropics/skills) to install skills directly:
+
+```bash
+npx skills add rob-vb/bragfast-skills
+```
+
+This automatically installs to your `.agents/skills/` directory (and symlinks into `.claude/skills/` for Claude Code compatibility).
 
 ### Option 3: Clone and Copy
 
